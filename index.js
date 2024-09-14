@@ -9,8 +9,8 @@ const app = express();
 app.use(cors());
 const server = http.createServer(app);
 const allowedOrigins = [
-  "https://cross-and-zero.vercel.app/",
-  "https://cross-and-zero-git-main-shwetank-nitps-projects.vercel.app/",
+  "https://cross-and-zero.vercel.app",
+  "https://cross-and-zero-git-main-shwetank-nitps-projects.vercel.app",
 ];
 const io = socketIo(server, {
   cors: {
