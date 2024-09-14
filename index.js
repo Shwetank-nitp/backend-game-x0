@@ -8,9 +8,19 @@ const GameManager = require("./GameManager");
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
+const allowedOrigins = [
+  "https://cross-and-zero.vercel.app/",
+  "https://cross-and-zero-git-main-shwetank-nitps-projects.vercel.app/",
+];
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -55,5 +65,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log("listening on *:3000");
+  console.log("server running");
 });
