@@ -97,10 +97,14 @@ class GameManager {
           console.log(error);
         });
 
+      this.io.to(palyer).emit("getBoard", game.board);
+      this.io.to(opponent).emit("getBoard", game.board);
+
       if (game.checkWin()) {
         this.io.to(palyer).emit("winner", "you have won");
         this.io.to(opponent).emit("looser", "you loose the game");
         this.games.delete(gameID);
+        return;
       }
 
       if (game.checkDraw()) {
@@ -109,9 +113,6 @@ class GameManager {
         this.io.to(opponent).emit("draw", "Match draw!!");
         this.games.delete(gameID);
       }
-
-      this.io.to(palyer).emit("getBoard", game.board);
-      this.io.to(opponent).emit("getBoard", game.board);
     } catch (error) {
       throw error;
     }

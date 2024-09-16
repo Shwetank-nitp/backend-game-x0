@@ -11,6 +11,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   "https://cross-and-zero.vercel.app",
   "https://cross-and-zero-git-main-shwetank-nitps-projects.vercel.app",
+  "http://localhost:5173",
 ];
 const io = socketIo(server, {
   cors: {
